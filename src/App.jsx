@@ -7,6 +7,7 @@ const API = "https://mern-notes-backend-gf66.onrender.com";
 export default function App() {
   const [notes, setNotes] = useState([]);
   const [form, setForm] = useState({ title: "", content: "" });
+  const [isEditing, setIsEditing] = useState(false);
 
   // Fetch notes on page load
   useEffect(() => {
@@ -30,8 +31,16 @@ export default function App() {
   };
 
   // Edit note
-  const editNote = async (id) => {
+  const editNote = async (note) => {
+    setIsEditing(true);
+    setForm(note);
+  };
+
+  // Update note
+  const updateNote = async (id) => {
     await axios.put(`${API}/update-note/${id}`);
+    setIsEditing(false);
+    setForm({ title: "", content: "" });
     fetchNotes();
   };
 
@@ -63,7 +72,7 @@ export default function App() {
         />
 
         <button className="btn btn-primary btn-sm w-100">
-          Add Note
+          {isEditing ? 'Update Note' : 'Add Note'}
         </button>
       </form>
 
@@ -81,7 +90,7 @@ export default function App() {
 
             <button
               className="btn btn-outline-danger btn-sm"
-              onClick={() => editNote(note._id)}
+              onClick={() => editNote(note)}
             >
               Edit
             </button>

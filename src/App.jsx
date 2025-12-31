@@ -2,14 +2,17 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const API = "https://mern-notes-backend.onrender.com/notes";
+// const API = "http://localhost:5000/notes";
 
 export default function App() {
   const [notes, setNotes] = useState([]);
   const [form, setForm] = useState({ title: "", content: "" });
+  console.log(form, 'formform')
 
   // Fetch notes on page load
   useEffect(() => {
     fetchNotes();
+    console.log('fetching notes...')
   }, []);
 
   const fetchNotes = async () => {

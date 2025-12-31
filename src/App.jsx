@@ -25,7 +25,9 @@ export default function App() {
     e.preventDefault();
     if (!form.title || !form.content) return;
 
-    await axios.post(`${API}/add-note`, form);
+    if (isEditing) await axios.put(`${API}/update-note`, form)
+    await axios.post(`${API}/add-note`, form)
+
     setForm({ title: "", content: "" });
     fetchNotes();
   };

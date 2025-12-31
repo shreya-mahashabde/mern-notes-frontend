@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const API = "https://mern-notes-backend.onrender.com/notes";
-// const API = "http://localhost:5000/notes";
+// const API = "https://mern-notes-backend.onrender.com/notes";
+const API = "https://474pp90k-5000.inc1.devtunnels.ms/notes";
 
 export default function App() {
   const [notes, setNotes] = useState([]);
@@ -12,7 +12,7 @@ export default function App() {
   // Fetch notes on page load
   useEffect(() => {
     fetchNotes();
-    console.log('fetching notes...')
+    console.log('fetching notes...1')
   }, []);
 
   const fetchNotes = async () => {

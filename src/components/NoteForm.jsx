@@ -6,7 +6,6 @@ export default function NoteForm() {
     const [notes, setNotes] = useState([]);
 
     const handleSubmit = (e) => {
-        console.log("handleSubmit called");
         e.preventDefault();
         if (title.trim() && content.trim()) {
             const newNote = {

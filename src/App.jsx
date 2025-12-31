@@ -1,22 +1,21 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const API = "https://mern-notes-backend-gf66.onrender.com/notes";
+const API = "https://mern-notes-backend-gf66.onrender.com/";
 // const API = "http://localhost:5000/notes";
 
 export default function App() {
   const [notes, setNotes] = useState([]);
   const [form, setForm] = useState({ title: "", content: "" });
-  console.log(form, 'formform')
 
   // Fetch notes on page load
   useEffect(() => {
     fetchNotes();
-    console.log('fetching notes...1')
+    console.log('fetching notes...2')
   }, []);
 
   const fetchNotes = async () => {
-    const res = await axios.get(API);
+    const res = await axios.get(`${API}/get-notes`);
     setNotes(res.data);
   };
 
@@ -25,14 +24,20 @@ export default function App() {
     e.preventDefault();
     if (!form.title || !form.content) return;
 
-    await axios.post(API, form);
+    await axios.post(`${API}/add-note`, form);
     setForm({ title: "", content: "" });
+    fetchNotes();
+  };
+
+  // Edit note
+  const editNote = async (id) => {
+    await axios.put(`${API}/update-note/${id}`);
     fetchNotes();
   };
 
   // Delete note
   const deleteNote = async (id) => {
-    await axios.delete(`${API}/${id}`);
+    await axios.delete(`${API}/delete-note/${id}`);
     fetchNotes();
   };
 
@@ -74,6 +79,12 @@ export default function App() {
               <div className="text-muted small">{note.content}</div>
             </div>
 
+            <button
+              className="btn btn-outline-danger btn-sm"
+              onClick={() => editNote(note._id)}
+            >
+              Edit
+            </button>
             <button
               className="btn btn-outline-danger btn-sm"
               onClick={() => deleteNote(note._id)}

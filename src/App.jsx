@@ -25,7 +25,7 @@ export default function App() {
     e.preventDefault();
     if (!form.title || !form.content) return;
 
-    if (isEditing) await axios.put(`${API}/update-note`, form)
+    if (isEditing) await axios.put(`${API}/update-note/${id}`, form)
     await axios.post(`${API}/add-note`, form)
 
     setForm({ title: "", content: "" });
@@ -36,14 +36,6 @@ export default function App() {
   const editNote = async (note) => {
     setIsEditing(true);
     setForm(note);
-  };
-
-  // Update note
-  const updateNote = async (id) => {
-    await axios.put(`${API}/update-note/${id}`);
-    setIsEditing(false);
-    setForm({ title: "", content: "" });
-    fetchNotes();
   };
 
   // Delete note

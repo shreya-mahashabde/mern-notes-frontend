@@ -23,12 +23,16 @@ export default function App() {
   // Add note
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log('000');
     if (!form.title || !form.content) return;
 
-    if (isEditing) await axios.put(`${API}/update-note/${id}`, form)
-    await axios.post(`${API}/add-note`, form)
+    console.log('111');
+    if (isEditing) await axios.put(`${API}/update-note/${id}`, form);
+    await axios.post(`${API}/add-note`, form);
+    console.log('222');
 
     setForm({ title: "", content: "" });
+    console.log('333');
     fetchNotes();
   };
 
@@ -65,7 +69,7 @@ export default function App() {
           onChange={(e) => setForm({ ...form, content: e.target.value })}
         />
 
-        <button className="btn btn-primary btn-sm w-100">
+        <button type="Submit" className="btn btn-primary btn-sm w-100">
           {isEditing ? 'Update Note' : 'Add Note'}
         </button>
       </form>

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-// const API = "https://mern-notes-backend.onrender.com/notes";
-const API = "https://474pp90k-5000.inc1.devtunnels.ms/notes";
+const API = "https://mern-notes-backend-gf66.onrender.com/notes";
+// const API = "http://localhost:5000/notes";
 
 export default function App() {
   const [notes, setNotes] = useState([]);
